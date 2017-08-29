@@ -1,0 +1,7 @@
+{% extends 'sunny/base.html' %}
+{% block title %}Настройки Профиля{% endblock %}
+{% block content %}
+    <a href="{% url 'auth_password_change' %}">Изменить пароль</a>
+    <br/>
+    <a href="{% url 'change_picture' %}">Изменить фото</a>
+{% endblock %}

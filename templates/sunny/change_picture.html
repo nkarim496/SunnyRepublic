@@ -1,0 +1,14 @@
+{% extends 'sunny/base.html' %}
+{% block title %}Изменить Фото{% endblock %}
+{% block content %}
+    {% if changed %}
+    <p><strong>Фото обновлено!</strong></p>
+    <a href="{% url 'profile_settings' %}">Вернуться в настройки</a>
+    {% else %}
+    <form action="." method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+        <input type="submit" value="Изменить">
+    </form>
+    {% endif %}
+{% endblock %}

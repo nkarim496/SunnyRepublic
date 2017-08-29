@@ -1,0 +1,29 @@
+{% extends 'sunny/new_base.html' %}
+{% block content %}
+    {% if books %}
+        <div class="alert alert-warning" role="alert">
+        Ссылки на учебные материалы:
+        <ul>
+        {% for book in books %}
+            <li><a href="{{ book.link }}">{{ book.title }}</a></li>
+        {% endfor %}
+        </ul>
+        </div>
+    {% else %}
+        <div class="alert alert-warning" role="alert">Нет прикрепленной литературы</div>
+    {% endif %}
+    {% if homeworks %}
+        {% for homework in homeworks %}
+            <div class="card">
+                <div class="card-header">{{ homework.date | date:"d F Y" }}</div>
+                <div class="card-block">
+                    <div class="card-text">
+                        {{ homework.task }}
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    {% else %}
+        <strong>Нет оценок!</strong>
+    {% endif %}
+{% endblock %}

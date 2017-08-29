@@ -1,0 +1,17 @@
+{% extends 'sunny/base.html' %}
+{% block content %}
+    {% if homework %}
+        <p><strong>{{ homework.date }}</strong> {{ homework.task }}</p>
+    {% else %}
+        <strong>Нет домашки!</strong>
+    {% endif %}
+    {% if books %}
+        <ul>
+        {% for book in books %}
+            <li><a href="{{ book.link }}">{{ book.title }}</a></li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <strong>Нет прикрепленной литературы</strong>
+    {% endif %}
+{% endblock %}

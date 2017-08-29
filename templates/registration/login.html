@@ -1,0 +1,29 @@
+{% extends 'registration/reg_base.html' %}
+{% block title %}Вход Sunny Republic{% endblock %}
+{% block content %}
+<form class="form-signin" action="." method="post">
+    {% csrf_token %}
+    {% if form.non_field_errors %}
+        {% for error in form.non_field_errors %}
+            <div class="alert alert-danger" role="alert">
+                <strong>{{ error|escape }}</strong>
+            </div>
+        {% endfor %}
+    {% else %}
+        <div class="alert alert-success" role="alert">
+            <strong>Добро пожаловать в Sunny Republic! Пожалуйста, введите ваши логин и пароль.</strong>
+        </div>
+    {% endif %}
+    {{ form.username.errors }}
+    <label for="{{ form.username.id_for_label }}" class="sr-only">Логин:</label>
+    <input type="text" class="form-control" name="{{ form.username.html_name }}" id="{{ form.username.auto_id }}" placeholder="Логин" maxlength="254" autofocus required >
+
+    <label for="{{ form.password.id_for_label }}" class="sr-only">Пароль:</label>
+    <input type="password" class="form-control" name="{{ form.password.html_name }}" id="{{ form.password.auto_id }}" placeholder="Пароль" required/>
+
+    <button class="btn btn-lg btn-primary btn-block" type="submit">Войти</button>
+</form>
+<p class="password_reset_text">Забыл пароль? <a href="{% url 'auth_password_reset' %}">Восстановить</a>!</p>
+{% endblock %}
+
+
