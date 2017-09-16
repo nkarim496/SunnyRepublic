@@ -1,0 +1,29 @@
+{% if les_val %}
+    {% for lesson in les_val %}
+    <div class="lesson {% if not lesson.1 %}tl-not-eval{% endif %}">
+        <div class="row">
+            <div class="col-sm-6">
+                <h4>{{ lesson.0.title }} <span>{{ lesson.0.date|date:"j.m.Y" }} {{ lesson.0.date|time:"H:i" }}</span></h4>
+            </div>
+            <div class="col-sm-6">
+                {% if lesson.1.value %}
+                <div class="tl-edit">
+                    +{{ lesson.1.value }} <i class="fa fa-star fa-fw" aria-hidden="true"></i>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+        <p class="tl-p">{{ lesson.0.homework }}</p>
+        {% if lesson.1.comment %}
+            <p class="t-comm">{{ lesson.1.comment }}</p>
+        {% endif %}
+        {% if lesson.0.students %}
+        <div class="tl-std">
+            {% for member in lesson.0.students.all %}
+            <img class="img-fluid" src="{{ MEDIA_URL }}{{ member.pic }}" alt="Фотография {{ member.user.first_name }}">
+            {% endfor %}
+        </div>
+        {% endif %}
+    </div>
+    {% endfor %}
+{% endif %}

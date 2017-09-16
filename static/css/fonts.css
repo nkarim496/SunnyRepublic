@@ -1,0 +1,21 @@
+@font-face {
+	font-family: "RobotoRegular";
+	src: url("../fonts/RobotoRegular/RobotoRegular.eot");
+	src: url("../fonts/RobotoRegular/RobotoRegular.eot?#iefix") format("embedded-opentype"),
+			 url("../fonts/RobotoRegular/RobotoRegular.woff") format("woff"),
+			 url("../fonts/RobotoRegular/RobotoRegular.ttf") format("truetype");
+	font-style: normal;
+	font-weight: normal;
+}
+@font-face {
+	font-family: "RobotoLight";
+	src: url("../fonts/Roboto-Light.ttf") format("truetype");
+	font-style: light;
+	font-weight: light;
+}
+@font-face {
+	font-family: "RobotoBold";
+	src: url("../fonts/Roboto-Bold.ttf") format("truetype");
+	font-style: bold;
+	font-weight: bold;
+}

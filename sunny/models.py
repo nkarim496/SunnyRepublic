@@ -39,7 +39,7 @@ class Student(models.Model):
 
 class Lesson(models.Model):
     title = models.CharField(max_length=400, verbose_name='Тема занятия')
-    student = models.ManyToManyField(Student)
+    students = models.ManyToManyField(Student)
     teacher = models.ForeignKey(Teacher, default=1)
     date = models.DateTimeField(verbose_name='дата занятия', default=timezone.now)
     homework = models.TextField(verbose_name='домашнее задание', blank=True)

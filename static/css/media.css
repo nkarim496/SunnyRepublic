@@ -1,0 +1,122 @@
+/*==========  Desktop First Method  ==========*/
+
+/* Large Devices, Wide Screens */
+@media only screen and (max-width : 1200px) {
+
+}
+
+/* Medium Devices, Desktops */
+@media only screen and (max-width : 991px) {
+	html {
+		font-size: 14px;
+	}
+}
+
+/* Small Devices, Tablets */
+@media only screen and (max-width : 767px) {
+	
+	/*Disable Animation on Mobile Devices*/
+	.animated {
+		/*CSS transitions*/
+		-o-transition-property: none !important;
+		-moz-transition-property: none !important;
+		-ms-transition-property: none !important;
+		-webkit-transition-property: none !important;
+		transition-property: none !important;
+		/*CSS transforms*/
+		-o-transform: none !important;
+		-moz-transform: none !important;
+		-ms-transform: none !important;
+		-webkit-transform: none !important;
+		transform: none !important;
+		/*CSS animations*/
+		-webkit-animation: none !important;
+		-moz-animation: none !important;
+		-o-animation: none !important;
+		-ms-animation: none !important;
+		animation: none !important;
+	}
+	.content {
+		float: none;
+		width: 100%;
+	}
+	.next-lesson {
+		margin-bottom: 3rem;
+	}
+	.star-bar {
+	    padding: 1.5rem 0 0;
+		text-align: left;
+		font-size: 1rem;
+	}
+	.static-panel {
+		padding: 0;
+	}
+	.s-box {
+		height: 100%;
+    	padding: 2rem;
+	}
+	.s-container > div:nth-child(1) > .s-box {
+		border-right: 1px solid #F1EDE8;
+		border-bottom: 1px solid #F1EDE8;
+	}
+	.s-container > div:nth-child(2) > .s-box {
+		border-bottom: 1px solid #F1EDE8;
+	}
+	.s-container > div:nth-child(3) > .s-box {
+		border-right: 1px solid #F1EDE8;
+	}
+	.bor {
+		border-right: none;
+		border-bottom: 1px solid #F1EDE8;
+	}
+
+}
+
+@media only screen and (max-width: 575px) {
+	.bora-1 {
+		border-bottom: 1px solid #F1EDE8;
+	}
+	.bora-2 {
+		border-right: none;
+		border-bottom: 1px solid #F1EDE8;
+	}
+
+}
+
+/* Extra Small Devices, Phones */
+@media only screen and (max-width : 480px) {
+
+}
+
+/* Custom, iPhone Retina */
+@media only screen and (max-width : 320px) {
+
+}
+
+
+/*==========  Mobile First Method  ==========*/
+
+/* Custom, iPhone Retina */
+@media only screen and (min-width : 320px) {
+
+}
+
+/* Extra Small Devices, Phones */
+@media only screen and (min-width : 480px) {
+
+}
+
+/* Small Devices, Tablets */
+@media only screen and (min-width : 768px) {
+
+}
+
+/* Medium Devices, Desktops */
+@media only screen and (min-width : 992px) {
+
+}
+
+/* Large Devices, Wide Screens */
+@media only screen and (min-width : 1200px) {
+
+}

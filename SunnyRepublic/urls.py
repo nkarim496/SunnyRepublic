@@ -22,10 +22,10 @@ from sunny import views
 
 urlpatterns = [
     url(r'^$', views.index, name='index'),
-    url(r'^progress/$', views.progress, name='progress'),
-    url(r'^homeworks/$', views.homeworks_show, name='homeworks'),
-    url(r'^settings/$', views.profile_settings, name='profile_settings'),
     url(r'^settings/change_pic/$', views.change_picture, name='change_picture'),
     url(r'^admin/', admin.site.urls),
     url(r'^accounts/', include('registration.backends.simple.urls')),
+    url(r'^student_home/$', views.student_home, name='student_home'),
+    url(r'^student_lessons/$', views.student_lessons, name='student_lessons'),
+    url(r'^student_lessons_ajax/$', views.student_lessons_ajax, name='student_lessons_ajax'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

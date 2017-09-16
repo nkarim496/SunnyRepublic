@@ -1,0 +1,110 @@
+{% extends 'sunny/base.html' %}
+{% load staticfiles %}
+
+{% block title %}Home{% endblock title %}
+
+{% block content %}
+<!-- START student's static -->
+<div class="static-panel">
+    <div class="row no-gutters s-container">
+        <div class="col-md-3 col-sm-6 col-6"><span class="s-box">посещений<strong>{{ student.visits }}</strong></span></div>
+        <div class="col-md-3 col-sm-6 col-6"><span class="s-box">cash<strong>{{ student.cash }}</strong></span></div>
+        <div class="col-md-3 col-sm-6 col-6"><span class="s-box">молодец<strong>{{ molodec }}%</strong></span></div>
+        <div class="col-md-3 col-sm-6 col-6"><span class="s-box">рейтинг<strong>{{ student.rate }}</strong></span></div>
+    </div>
+</div>
+<!-- END student's static -->
+
+{% if nxt %}
+<!-- START Next Lesson -->
+<div class="row">
+    <div class="col-md-12">
+        <div class="tl-stdu">
+            <div class="tl-std-h">
+                <div class="sl-nl">
+                    <span class="sl-nl-date">{{ nxt.date|date:"l. j F" }}</span>
+                    <span class="sl-nl-time">{{ nxt.date|time:"H:i" }}</span>
+                    <span class="sl-nl-text">тема:</span>
+                    <span class="sl-nl-title">{{ nxt.title }}</span>
+                </div>
+            </div>
+            <div class="t-std-s container">
+                <div class="row">
+                    <div class="col-md-6 bor">
+                        <h4 class="sl-nl-h4">Домашка</h4>
+                        <div class="sl-nl-hw">
+                            {% if nxt.homework %}
+                            <p>{{ nxt.homework }}</p>
+                            {% else %}
+                            <p>Гуляем! Домашку не задали!</p>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <h4 class="sl-nl-h4">Участники</h4>
+                        <div class="sl-nl-uch">
+                            {% if nxt.students %}
+                                {% for member in nxt.students.all %}
+                                    <img class="img-fluid" src="{{ MEDIA_URL }}{{ member.pic }}" alt="Фото {{ member.user.first_name }}">
+                                {% endfor %}
+                            {% else %}
+                                <strong>Не добавлено ни одного участника.</strong>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- END Next Lesson -->
+
+<!-- START teacheer -->
+<div class="row">
+    <div class="col-md-12">
+        <div class="tl-stdu">
+            <div class="tl-std-h">
+                <img class="img-fluid" src="{{ MEDIA_URL }}{{ nxt.teacher.pic }}" alt="Фотография {{ nxt.teacher.user.first_name }}">
+                <h4>{{ nxt.teacher.user.last_name }} {{ nxt.teacher.user.first_name }}</h4>
+                <p>{{ nxt.teacher.cite }}</p>
+                <span class="tstds-phone"><i class="fa fa-phone fa-fw" aria-hidden="true"></i> {{ nxt.teacher.phone }}</span>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- END teacher -->
+{% endif %}
+
+{% if les_val %}
+<!-- START Lessons panel -->
+<div class="lessons">
+    {% for lesson in les_val %}
+    <div class="lesson {% if not lesson.1 %}tl-not-eval{% endif %}">
+        <div class="row">
+            <div class="col-sm-6">
+                <h4>{{ lesson.0.title }} <span>{{ lesson.0.date|date:"j.m.Y" }} {{ lesson.0.date|time:"H:i" }}</span></h4>
+            </div>
+            <div class="col-sm-6">
+                {% if lesson.1.value %}
+                <div class="tl-edit">
+                    +{{ lesson.1.value }} <i class="fa fa-star fa-fw" aria-hidden="true"></i>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+        <p class="tl-p">{{ lesson.0.homework }}</p>
+        {% if lesson.1.comment %}
+            <p class="t-comm">{{ lesson.1.comment }}</p>
+        {% endif %}
+        {% if lesson.0.students %}
+        <div class="tl-std">
+            {% for member in lesson.0.students.all %}
+            <img class="img-fluid" src="{{ MEDIA_URL }}{{ member.pic }}" alt="Фотография {{ member.user.first_name }}">
+            {% endfor %}
+        </div>
+        {% endif %}
+    </div>
+    {% endfor %}
+<!-- END Lessons Panel -->
+{% endif %}
+{% endblock content %}
