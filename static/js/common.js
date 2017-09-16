@@ -7,7 +7,7 @@ $(function() {
 			$.get('/student_lessons_ajax/', {offset: offset}, function(data) {
                 $('.lessons').delay(1500).append(data);
             });
-			offset = offset + offset;
+			offset = offset + 10;
 		}
 	});
 

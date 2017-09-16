@@ -111,7 +111,7 @@ def student_lessons_ajax(request):
     if request.method == 'GET':
         offset = int(request.GET['offset'])
         student = Student.objects.get(user=request.user)
-        lessons = student.lesson_set.filter(date__lte=datetime.now()).order_by('-date')[offset:offset+offset]
+        lessons = student.lesson_set.filter(date__lte=datetime.now()).order_by('-date')[offset:offset+10]
         values = []
         for lesson in lessons:
             value = Value.objects.filter(lesson=lesson, student=student).first()
