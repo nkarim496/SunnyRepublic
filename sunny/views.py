@@ -118,3 +118,11 @@ def student_lessons_ajax(request):
             values.append(value)
         context['les_val'] = zip(lessons, values)
     return render(request, 'sunny/lessons_ajax.html', context)
+
+
+@login_required
+@user_passes_test(is_student)
+def student_books(request):
+    student = Student.objects.get(user=request.user)
+    books = student.books.all().order_by('title')
+    return render(request, 'sunny/student_books.html', {'student': student, 'books': books})

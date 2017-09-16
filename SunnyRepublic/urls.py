@@ -28,4 +28,5 @@ urlpatterns = [
     url(r'^student_home/$', views.student_home, name='student_home'),
     url(r'^student_lessons/$', views.student_lessons, name='student_lessons'),
     url(r'^student_lessons_ajax/$', views.student_lessons_ajax, name='student_lessons_ajax'),
+    url(r'^student_books/$', views.student_books, name='student_books'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -595,7 +595,7 @@ div[off-canvas*=left] {
     background-color: #80a8cc;
     overflow: hidden;
 }
-.l-head > h3 {
+.l-head > h3, .tl-std-h > h3 {
 	color: #fff;
     text-align: center;
     font-size: 3rem;
@@ -882,6 +882,9 @@ div[off-canvas*=left] {
     border-radius: 3rem;
     color: #fff;
 }
+.btn-home:hover {
+	text-decoration: none;
+}
 .top-menu > .nav {
 	text-transform: uppercase;
     font-weight: 300;
@@ -983,9 +986,64 @@ div[off-canvas*=left] {
     border-bottom-color: #fffbf5;
 }
 
-/* ajax loader */
-#ajax-loader {
-	display: none;
-	text-align: center;
-	margin-bottom: 2rem;
+/* Effect 21: borders slight translate */
+nav.cl-effect-21 a {
+	position: relative;
+	display: inline-block;
+	padding: 10px;
+	margin: 15px 25px;
+	outline: none;
+	color: #80a8cc;
+	text-decoration: none;
+	text-transform: uppercase;
+	letter-spacing: 1px;
+	font-weight: 400;
+	text-shadow: none;
+	font-size: 1.2em;
+}
+
+nav.cl-effect-21 a:hover,
+nav.cl-effect-21 a:focus {
+	outline: none;
+}
+
+.cl-effect-21 a::before,
+.cl-effect-21 a::after {
+	position: absolute;
+	left: 0;
+	width: 100%;
+	height: 2px;
+	background: #80a8cc;
+	content: '';
+	opacity: 0;
+	-webkit-transition: opacity 0.3s, -webkit-transform 0.3s;
+	-moz-transition: opacity 0.3s, -moz-transform 0.3s;
+	transition: opacity 0.3s, transform 0.3s;
+	-webkit-transform: translateY(-10px);
+	-moz-transform: translateY(-10px);
+	transform: translateY(-10px);
+}
+
+.cl-effect-21 a::before {
+	top: 0;
+	-webkit-transform: translateY(-10px);
+	-moz-transform: translateY(-10px);
+	transform: translateY(-10px);
+}
+
+.cl-effect-21 a::after {
+	bottom: 0;
+	-webkit-transform: translateY(10px);
+	-moz-transform: translateY(10px);
+	transform: translateY(10px);
+}
+
+.cl-effect-21 a:hover::before,
+.cl-effect-21 a:focus::before,
+.cl-effect-21 a:hover::after,
+.cl-effect-21 a:focus::after {
+	opacity: 1;
+	-webkit-transform: translateY(0px);
+	-moz-transform: translateY(0px);
+	transform: translateY(0px);
 }

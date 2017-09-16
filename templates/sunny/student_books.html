@@ -1,0 +1,48 @@
+{% extends 'sunny/base.html' %}
+{% load staticfiles %}
+
+{% block title %}My books{% endblock title %}
+
+{% block content %}
+<!-- START Students panel -->
+<div class="tl-stds">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="tl-stdu">
+                <div class="tl-std-h">
+                    <h3>Литература</h3>
+                </div>
+                <div class="books">
+                    {% if books %}
+                        {% for book in books %}
+                            <div class="book">
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-8">
+                                            <span>{{ book.title }}</span>
+                                        </div>
+                                        <div class="col-4 book-trash">
+                                            <a href="{{ book.link }}"><i class="fa fa-download fa-fw" aria-hidden="true"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    {% else %}
+                        <div class="book">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <span>У вас пока нет литературы для изучения.</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- END Students Panel -->
+{% endblock content %}

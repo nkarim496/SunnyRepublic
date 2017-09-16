@@ -15,17 +15,11 @@
 	<!-- START TOP MENU -->
 	<div class="top-menu hidden-sm-down">
 		<a href="{% url 'student_home' %}" class="btn-home"><i class="fa fa-home fa-fw" aria-hidden="true"></i></a>
-		<ul class="nav">
-			<li class="nav-item">
-				<a class="nav-link" href="{% url 'student_lessons' %}">Занятия</a>
-			</li>
-			<li class="nav-item">
-				<a class="nav-link" href="#">Литература</a>
-			</li>
-			<li class="nav-item">
-				<a class="nav-link" href="#">Рейтинги</a>
-			</li>
-		</ul>
+		<nav class="cl-effect-21">
+            <a class="nav-link" href="{% url 'student_lessons' %}">Занятия</a>
+            <a class="nav-link" href="{% url 'student_books' %}">Литература</a>
+            <a class="nav-link" href="#">Рейтинги</a>
+		</nav>
 		<div class="tm-user">
 			<a href="#" class="tm-user-wrp" id="profile-link">
 				<span class="tm-arrow"><i class="fa fa-caret-down" aria-hidden="true"></i></span>
