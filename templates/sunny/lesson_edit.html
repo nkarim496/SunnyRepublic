@@ -1,0 +1,219 @@
+{% extends 'sunny/base.html' %}
+{% load staticfiles %}
+
+{% block title %}Edit lesson{% endblock title %}
+
+{% block content %}
+    {% if form.students.errors %}
+    <div class="alert alert-danger" role="alert">
+        <p class="mb-0">К занятию должен быть прикреплен минимум один студент.</p>
+    </div>
+    {% endif %}
+    {% if editable %}
+    <!-- START lesson add -->
+		<div class="l-box">
+			<div class="l-head mb-0">
+				<h3>Занятие</h3>
+			</div>
+			<div class="l-edit">
+				<div class="l-edit-form">
+					<form action="." method="post" id="form-lesson-add">
+                        {% csrf_token %}
+                        <fieldset>
+                        {{ form.non_field_errors }}
+                        {{ form.students }}
+						<div class="form-group {% if form.title.errors %}errors{% endif %}">
+                            {{ form.title.errors }}
+							<label for="{{ form.title.id_for_label }}" >{{ form.title.label }}:</label>
+							{{ form.title }}
+						</div>
+						<div class="form-group {% if form.homework.errors %}errors{% endif %}">
+                            {{ form.homework.errors }}
+							<label for="{{ form.homework.id_for_label }}" >{{ form.homework.label }}:</label>
+                            {{ form.homework }}
+						</div>
+						<div class="row">
+							<div class="col-md-6">
+								<div class="form-group {% if form.date.errors %}errors{% endif %}">
+									<label for="{{ form.date.id_for_label }}" >{{ form.date.label }}:</label>
+                                    {{ form.date }}
+                                    {{ form.date.errors }}
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="form-group {% if form.time.errors %}errors{% endif %}">
+									<label for="{{ form.time.id_for_label }}" >{{ form.time.label }}:</label>
+                                    {{ form.time }}
+                                    {{ form.time.errors }}
+								</div>
+							</div>
+						</div>
+                        </fieldset>
+					</form>
+				</div>
+			</div>
+		</div>
+    <!-- END lesson add -->
+    {% else %}
+        <!-- START Lesson -->
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="tl-stdu mb-5">
+                        <div class="tl-std-h">
+                            <div class="sl-nl">
+                                <span class="sl-nl-date">{{ lesson.date|date:"l. j F" }}</span>
+                                <span class="sl-nl-time">{{ lesson.date|time:"H:i" }}</span>
+                                <span class="sl-nl-text">тема:</span>
+                                <span class="sl-nl-title">{{ lesson.title }}</span>
+                            </div>
+                        </div>
+                        <div class="t-std-s container">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <h4 class="sl-nl-h4">Домашка</h4>
+                                    <div class="sl-nl-hw">
+                                        {% if lesson.homework %}
+                                        <p>{{ lesson.homework }}</p>
+                                        {% else %}
+                                        <p>Гуляем! Домашку не задали!</p>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <!-- END Lesson -->
+    {% endif %}
+    <!-- START Search panel -->
+    {% if editable %}
+		<div class="l-box">
+			<div class="l-head mb-0">
+				<div class="form-group mb-0 pos-r">
+					<label for="lesson-add-student-search" class="blue-label"><i class="fa fa-search"></i></label>
+					<input type="text" class="form-control blue-input" id="lesson-add-student-search">
+				</div>
+			</div>
+            <div class="l-body" id="student-search">
+                <div class="l-srcr">
+                    <p class="text-center mb-0">Начните писать <strong>Имя</strong> студента, чтобы добавить в участники занятия.</p>
+                </div>
+            </div>
+		</div>
+    {% endif %}
+    <!-- END Search panel -->
+
+    <!-- START students -->
+        <div class="tl-stds">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="tl-stdu">
+                        <div class="tl-std-h">
+                            <h3>студенты</h3>
+                        </div>
+                        <div class="books" id="students-list">
+                            <div class="book book-header" id="student-list-header" style="display: none;">
+                                <p class="text-center mb-0">Пока нет участников занятия.</p>
+                            </div>
+                            <!-- Students without values -->
+                            {% if students_without_values %}
+                                {% for student in students_without_values %}
+                                    <div class="l-srcr" data-student_id="{{ student.pk }}">
+                                        <div class="container">
+                                            <div class="row">
+                                                <div class="col-3 col-sm-2 col-md-1">
+                                                    <a href="{% url 'student_page' student.user.username %}">
+                                                        <img class="img-fluid rounded-circle" width="50" src="{{ MEDIA_URL }}{{ student.pic }}" alt="Student's picture">
+                                                    </a>
+                                                </div>
+                                                <div class="col-6 col-sm-8 col-md-9">
+                                                    <a href="{% url 'student_page' student.user.username %}">{{ student.user.first_name }} {{ student.user.last_name }}</a>
+                                                </div>
+                                                <div class="col-3 col-sm-2 col-md-2 book-trash">
+                                                    {% if editable %}
+                                                        <button class="btn btn-outline-info student-delete" data-student_id="{{ student.pk }}">Убрать</button>
+                                                    {% else %}
+                                                        <a class="btn btn-outline-info" href="{% url 'value_add' student.user.username lesson.pk %}">Поставить оценку</a>
+                                                    {% endif %}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            {% else %}
+                                {% if editable %}
+                                    <div class="l-srcr">
+                                        <p class="text-center mb-0">Нет совпадений. Попробуйте ввести сначала <strong>Имя</strong> студента.</p>
+                                    </div>
+                                {% endif %}
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <!-- END students -->
+
+    {% if students_with_values %}
+        <!-- START students with values -->
+            <div class="tl-stds">
+                <div class="row">
+                    {% for student, value in students_with_values %}
+                        <div class="col-md-6">
+                            <div class="tl-stdu">
+                                <div class="tl-std-h">
+                                    {% if value.value == 10 %}
+                                        <span class="student-value red"></span>
+                                    {% else %}
+                                        <span class="student-value">{{ value.value }}</span>
+                                    {% endif %}
+                                    <a href="{% url 'student_page' student.user.username %}"><img class="img-fluid" src="{{ MEDIA_URL }}{{ student.pic }}" alt="Фотография студента"></a>
+                                    <h4><a href="{% url 'student_page' student.user.username %}">{{ student.user.first_name }} {{ student.user.last_name }}</a></h4>
+                                    <p class="white-txt-cite"><i class="fa fa-angle-double-left" aria-hidden="true"></i>{{ student.cite }}<i class="fa fa-angle-double-right" aria-hidden="true"></i></p>
+                                </div>
+                                <div class="tl-std-b">
+                                    <h4 class="box-body-h4">Комментарий</h4>
+                                    {% if value.comment %}
+                                    <div class="student-comment text-center">
+                                        <p>{{ value.comment }}</p>
+                                    </div>
+                                    {% else %}
+                                    <div class="student-comment text-center">
+                                        <p>Комментарий не добавлен.</p>
+                                    </div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        <!-- END students without values -->
+    {% endif %}
+
+    <!-- START Buttons -->
+        {% if not editable %}
+			<div class="row">
+				<div class="col-md-6">
+					<button type="submit" form="form-lesson-add" class="tl-btn save">Сохранить</button>
+				</div>
+				<div class="col-md-6">
+					<span class="tl-btn cancel">Назад</span>
+				</div>
+			</div>
+        {% else %}
+            <div class="row">
+				<div class="col-md-4">
+					<button type="submit" form="form-lesson-add" class="tl-btn save">Сохранить</button>
+				</div>
+				<div class="col-md-4">
+					<a href="#" class="tl-btn cancel">Назад</a>
+				</div>
+                <div class="col-md-4">
+					<a href="{% url 'lesson_delete' lesson.pk %}" class="tl-btn cancel">Удалить</a>
+				</div>
+			</div>
+        {% endif %}
+    <!-- END Buttons -->
+{% endblock content %}

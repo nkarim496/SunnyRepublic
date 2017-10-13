@@ -1,0 +1,73 @@
+{% extends 'sunny/base.html' %}
+{% load staticfiles %}
+
+{% block title %}Top Sunny Republic{% endblock %}
+
+{% block content %}
+    {% if top_3 %}
+        <!-- START top 3 -->
+        <div class="tl-stds">
+            <div class="row">
+                {% for member in top_3 %}
+                    <div class="col-md-12">
+                        <div class="tl-stdu mb-5">
+                            <div class="tl-std-h">
+                                <img class="img-fluid" src="{{ MEDIA_URL }}{{ member.pic }}" alt="Фотография студента">
+                                <h4><a href="{% url 'student_page' member.user.username %}">{{ member.user.first_name }} {{ member.user.last_name }}</a></h4>
+                                <p>{{ member.cite }}</p>
+                            </div>
+                            <div class="t-std-s container">
+                                <div class="row">
+                                    <div class="col-md-3 col-sm-3 col-6 bora-1"><h4>Посещений</h4><span>{{ member.visits }}</span></div>
+                                    <div class="col-md-3 col-sm-3 col-6 bora-2"><h4>Cash</h4><span>{{ member.cash }}$</span></div>
+                                    <div class="col-md-3 col-sm-3 col-6 bora-3"><h4>Молодец</h4><span>88%</span></div>
+                                    <div class="col-md-3 col-sm-3 col-6 bora-4"><h4>Рейтинг</h4><span>#{{ member.rate }}</span></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+        <!-- END top 3 -->
+    {% endif %}
+
+    {% if top_students %}
+        <!-- START Students top table -->
+        <div class="tl-stds">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="tl-stdu">
+                        <div class="tl-std-h">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-8 fio">
+                                        <span>ФИО</span>
+                                    </div>
+                                    <div class="col-4 rate"><span>Рейтинг</span></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="books">
+                            {% for member in top_students %}
+                                <div class="book">
+                                    <div class="container">
+                                        <div class="row">
+                                            <div class="col-8">
+                                                <a href="{% url 'student_page' member.user.username %}">{{ member.user.first_name }} {{ member.user.last_name }}</a>
+                                            </div>
+                                            <div class="col-4 book-trash">
+                                                #{{ member.rate }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- END Students top table -->
+    {% endif %}
+{% endblock %}

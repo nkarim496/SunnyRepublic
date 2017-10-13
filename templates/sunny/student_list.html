@@ -1,0 +1,25 @@
+{% if students %}
+    {% for student in students %}
+        <div class="l-srcr" data-student_id="{{ student.pk }}">
+            <div class="container">
+                <div class="row">
+                    <div class="col-3 col-sm-2 col-md-1">
+                        <a href="{% url 'student_page' student.user.username %}">
+                            <img class="img-fluid rounded-circle" width="50" src="{{ MEDIA_URL }}{{ student.pic }}" alt="Student's picture">
+                        </a>
+                    </div>
+                    <div class="col-6 col-sm-8 col-md-9">
+                        <a href="{% url 'student_page' student.user.username %}">{{ student.user.first_name }} {{ student.user.last_name }}</a>
+                    </div>
+                    <div class="col-3 col-sm-2 col-md-2 book-trash">
+                        <button class="btn btn-outline-info student-add" data-student_id="{{ student.pk }}">Добавить</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+{% else %}
+<div class="l-srcr">
+    <p class="text-center mb-0">Нет совпадений. Попробуйте ввести сначала <strong>Имя</strong> студента.</p>
+</div>
+{% endif %}

@@ -39,9 +39,9 @@ class Student(models.Model):
 
 class Lesson(models.Model):
     title = models.CharField(max_length=400, verbose_name='Тема занятия')
-    students = models.ManyToManyField(Student)
+    students = models.ManyToManyField(Student, blank=True)
     teacher = models.ForeignKey(Teacher, default=1)
-    date = models.DateTimeField(verbose_name='дата занятия', default=timezone.now)
+    date = models.DateTimeField(verbose_name='Дата', default=timezone.now)
     homework = models.TextField(verbose_name='домашнее задание', blank=True)
 
     def __str__(self):
@@ -49,9 +49,19 @@ class Lesson(models.Model):
 
 
 class Value(models.Model):
+    CHOICES = ((-3, '-3'),
+               (-2, '-2'),
+               (-1, '-1'),
+               (0, '0'),
+               (1, '1'),
+               (2, '2'),
+               (3, '3'),
+               (10, 'Н'))
     student = models.ForeignKey(Student)
+    teacher = models.ForeignKey(Teacher)
     lesson = models.ForeignKey(Lesson)
-    value = models.IntegerField(verbose_name='оценка', help_text='от -3 до 3', blank=True)
+    value = models.IntegerField(verbose_name='оценка', choices=CHOICES,
+                                default=CHOICES[3][0])
     comment = models.TextField(verbose_name='комментарий', blank=True)
 
     def __str__(self):

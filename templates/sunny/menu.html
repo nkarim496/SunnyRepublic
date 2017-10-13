@@ -8,7 +8,7 @@
 	<div class="sm-user hidden-md-up">
 		<a href="#" id="toggle-m-menu"><i class="fa fa-bars"></i></a>
 		<a href="{% url 'student_home' %}" class="sm-user-img"><img src="{{ MEDIA_URL }}{{ user.student.pic }}" alt="avatar" class="img-fluid"></a>
-		<a href="#"><i class="fa fa-sign-out"></i></a>
+		<a href="{% url 'auth_logout' %}"><i class="fa fa-sign-out"></i></a>
 	</div>
     <!-- END Mobile Menu -->
 
@@ -18,7 +18,7 @@
 		<nav class="cl-effect-21">
             <a class="nav-link" href="{% url 'student_lessons' %}">Занятия</a>
             <a class="nav-link" href="{% url 'student_books' %}">Литература</a>
-            <a class="nav-link" href="#">Рейтинги</a>
+            <a class="nav-link" href="{% url 'student_top' %}">Рейтинги</a>
 		</nav>
 		<div class="tm-user">
 			<a href="#" class="tm-user-wrp" id="profile-link">
@@ -26,9 +26,9 @@
 				<img src="{{ MEDIA_URL }}{{ user.student.pic }}" alt="avatar" class="tm-user-img">
 			</a>
 			<div class="tm-user-dropdown" id="profile-dropdown">
-				<a href="#"><i class="fa fa-user-circle fa-fw" aria-hidden="true"></i> Моя страница</a>
+				<a href="{% url 'student_page' user.username %}"><i class="fa fa-user-circle fa-fw" aria-hidden="true"></i> Моя страница</a>
 				<a href="#"><i class="fa fa-cog fa-fw" aria-hidden="true"></i> Настройки</a>
-				<a href="#"><i class="fa fa-sign-out fa-fw" aria-hidden="true"></i> Выход</a>
+				<a href="{% url 'auth_logout' %}"><i class="fa fa-sign-out fa-fw" aria-hidden="true"></i> Выход</a>
 			</div>
 		</div>
 	</div>
@@ -38,14 +38,14 @@
     <!-- START Mobile Menu -->
 	<div class="sm-user hidden-md-up">
 		<a href="#" id="toggle-m-menu"><i class="fa fa-bars"></i></a>
-		<a href="#" class="sm-user-img"><img src="{{ MEDIA_URL }}{{ user.teacher.pic }}" alt="avatar" class="img-fluid"></a>
-		<a href="#"><i class="fa fa-sign-out"></i></a>
+		<a href="{% url 'teacher_home' %}" class="sm-user-img"><img src="{{ MEDIA_URL }}{{ user.teacher.pic }}" alt="avatar" class="img-fluid"></a>
+		<a href="{% url 'auth_logout' %}"><i class="fa fa-sign-out"></i></a>
 	</div>
     <!-- END Mobile Menu -->
 
 	<!-- START TOP MENU -->
 	<div class="top-menu hidden-sm-down">
-		<a href="#" class="btn-home"><i class="fa fa-home fa-fw" aria-hidden="true"></i></a>
+		<a href="{% url 'teacher_home' %}" class="btn-home"><i class="fa fa-home fa-fw" aria-hidden="true"></i></a>
 		<ul class="nav">
 			<li class="nav-item">
 				<a class="nav-link" href="#">Занятия</a>
@@ -54,7 +54,7 @@
 				<a class="nav-link" href="#">Литература</a>
 			</li>
 			<li class="nav-item">
-				<a class="nav-link" href="#">Рейтинги</a>
+				<a class="nav-link" href="{% url 'student_top' %}">Рейтинги</a>
 			</li>
 		</ul>
 		<div class="tm-user">
@@ -63,9 +63,9 @@
 				<img src="{{ MEDIA_URL }}{{ user.teacher.pic }}" alt="avatar" class="tm-user-img">
 			</a>
 			<div class="tm-user-dropdown" id="profile-dropdown">
-				<a href="#"><i class="fa fa-user-circle fa-fw" aria-hidden="true"></i> Моя страница</a>
+				<a href="{% url 'teacher_page' user.username %}"><i class="fa fa-user-circle fa-fw" aria-hidden="true"></i> Моя страница</a>
 				<a href="#"><i class="fa fa-cog fa-fw" aria-hidden="true"></i> Настройки</a>
-				<a href="#"><i class="fa fa-sign-out fa-fw" aria-hidden="true"></i> Выход</a>
+				<a href="{% url 'auth_logout' %}"><i class="fa fa-sign-out fa-fw" aria-hidden="true"></i> Выход</a>
 			</div>
 		</div>
 	</div>

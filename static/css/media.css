@@ -69,6 +69,12 @@
 		border-right: none;
 		border-bottom: 1px solid #F1EDE8;
 	}
+	.student-panel {
+		text-align: center;
+	}
+	.student-panel img {
+		width: 150px;
+	}
 
 }
 
@@ -79,6 +85,15 @@
 	.bora-2 {
 		border-right: none;
 		border-bottom: 1px solid #F1EDE8;
+	}
+	.tl-std-h > h3 {
+		font-size: 2rem;
+	}
+	.book {
+		font-size: .8rem;
+	}
+	.lesson .lesson-date {
+		text-align: left;
 	}
 
 }

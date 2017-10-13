@@ -8,9 +8,9 @@
 <div class="static-panel">
     <div class="row no-gutters s-container">
         <div class="col-md-3 col-sm-6 col-6"><span class="s-box">посещений<strong>{{ student.visits }}</strong></span></div>
-        <div class="col-md-3 col-sm-6 col-6"><span class="s-box">cash<strong>{{ student.cash }}</strong></span></div>
+        <div class="col-md-3 col-sm-6 col-6"><span class="s-box">cash<strong>{{ student.cash }}$</strong></span></div>
         <div class="col-md-3 col-sm-6 col-6"><span class="s-box">молодец<strong>{{ molodec }}%</strong></span></div>
-        <div class="col-md-3 col-sm-6 col-6"><span class="s-box">рейтинг<strong>{{ student.rate }}</strong></span></div>
+        <div class="col-md-3 col-sm-6 col-6"><span class="s-box">рейтинг<strong>#{{ student.rate }}</strong></span></div>
     </div>
 </div>
 <!-- END student's static -->
@@ -59,7 +59,7 @@
 </div>
 <!-- END Next Lesson -->
 
-<!-- START teacheer -->
+<!-- START next lesson teacher -->
 <div class="row">
     <div class="col-md-12">
         <div class="tl-stdu">
@@ -72,7 +72,7 @@
         </div>
     </div>
 </div>
-<!-- END teacher -->
+<!-- END next lesson teacher -->
 {% endif %}
 
 {% if les_val %}

@@ -1,0 +1,100 @@
+{% extends 'sunny/base.html' %}
+{% load staticfiles %}
+
+{% block title %}New lesson{% endblock title %}
+
+{% block content %}
+    {% if form.students.errors %}
+    <div class="alert alert-danger" role="alert">
+        <p class="mb-0">К занятию должен быть прикреплен минимум один студент.</p>
+    </div>
+    {% endif %}
+    <!-- START lesson add -->
+		<div class="l-box">
+			<div class="l-head mb-0">
+				<h3>Занятие</h3>
+			</div>
+			<div class="l-edit">
+				<div class="l-edit-form">
+					<form action="." method="post" id="form-lesson-add">
+                        {% csrf_token %}
+                        {{ form.non_field_errors }}
+                        {{ form.students }}
+						<div class="form-group {% if form.title.errors %}errors{% endif %}">
+                            {{ form.title.errors }}
+							<label for="{{ form.title.id_for_label }}" >{{ form.title.label }}:</label>
+							{{ form.title }}
+						</div>
+						<div class="form-group {% if form.homework.errors %}errors{% endif %}">
+                            {{ form.homework.errors }}
+							<label for="{{ form.homework.id_for_label }}" >{{ form.homework.label }}:</label>
+                            {{ form.homework }}
+						</div>
+						<div class="row">
+							<div class="col-md-6">
+								<div class="form-group {% if form.date.errors %}errors{% endif %}">
+									<label for="{{ form.date.id_for_label }}" >{{ form.date.label }}:</label>
+                                    {{ form.date }}
+                                    {{ form.date.errors }}
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="form-group {% if form.time.errors %}errors{% endif %}">
+									<label for="{{ form.time.id_for_label }}" >{{ form.time.label }}:</label>
+                                    {{ form.time }}
+                                    {{ form.time.errors }}
+								</div>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+    <!-- END lesson add -->
+
+    <!-- START Search panel -->
+		<div class="l-box">
+			<div class="l-head mb-0">
+				<div class="form-group mb-0 pos-r">
+					<label for="lesson-add-student-search" class="blue-label"><i class="fa fa-search"></i></label>
+					<input type="text" class="form-control blue-input" id="lesson-add-student-search">
+				</div>
+			</div>
+            <div class="l-body" id="student-search">
+                <div class="l-srcr">
+                    <p class="text-center mb-0">Начните писать <strong>Имя</strong> студента, чтобы добавить в участники занятия.</p>
+                </div>
+            </div>
+		</div>
+    <!-- END Search panel -->
+
+    <!-- START students -->
+        <div class="tl-stds">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="tl-stdu">
+                        <div class="tl-std-h">
+                            <h3>студенты</h3>
+                        </div>
+                        <div class="books" id="students-list">
+                            <div class="book book-header" id="student-list-header">
+                                <p class="text-center mb-0">Пока нет участников занятия.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <!-- END students -->
+
+    <!-- START Buttons -->
+			<div class="row">
+				<div class="col-md-6">
+					<button type="submit" form="form-lesson-add" class="tl-btn save">Создать</button>
+				</div>
+				<div class="col-md-6">
+					<span class="tl-btn cancel">Назад</span>
+				</div>
+			</div>
+    <!-- END Buttons -->
+{% endblock content %}

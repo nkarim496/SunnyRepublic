@@ -5,13 +5,13 @@
         <span class="btn-close"><i class="fa fa-times"></i></span>
         <div class="sb-wrp">
             <div class="btns-slidebar">
-                <a href=""><i class="fa fa-user"></i></a>
+                <a href="{% url 'student_page' user.username %}"><i class="fa fa-user"></i></a>
                 <a href=""><i class="fa fa-cog"></i></a>
             </div>
             <ul>
                 <li><a href="{% url 'student_lessons' %}">Занятия</a></li>
                 <li><a href="{% url 'student_books' %}">Литература</a></li>
-                <li><a href="#">Рейтинги</a></li>
+                <li><a href="{% url 'student_top' %}">Рейтинги</a></li>
             </ul>
         </div>
     </div>

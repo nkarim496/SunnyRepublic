@@ -106,6 +106,9 @@
     </div>
     {% endfor %}
 </div>
+{% if count_l > 10 %}
+    <span class="show-more" id="show-more-lessons" data-count="{{ count_l }}" data-username="{{ student.user.username }}">Показать ещё</span>
+{% endif %}
 <!-- END Lessons Panel -->
 {% endif %}
 {% endblock content %}

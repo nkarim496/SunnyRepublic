@@ -1,0 +1,106 @@
+{% extends 'sunny/base.html' %}
+{% load staticfiles %}
+
+{% block title %}Value adding{% endblock title %}
+
+{% block content %}
+    {% if student %}
+        <!-- START student -->
+            <div class="student-panel">
+                <div class="row">
+                    <div class="col-md-3">
+                        <img class="img-fluid rounded-circle" src="{{ MEDIA_URL }}{{ student.pic }}" alt="User picture">
+                    </div>
+                    <div class="col-md-9">
+                        <h4 class="student-name">{{ student.user.first_name }} {{ student.user.last_name }}</h4>
+                        <p class="student-cite"><i class="fa fa-angle-double-left" aria-hidden="true"></i>{{ student.cite }}<i class="fa fa-angle-double-right" aria-hidden="true"></i></p>
+                        <div class="student-social-btns">
+                            <span class="student-phone"><i class="fa fa-phone mr-2" aria-hidden="true"></i>{{ student.phone }}</span>
+                            <a href="#">
+                                <span class="fa-stack fa-lg">
+                                  <i class="fa fa-circle fa-stack-2x"></i>
+                                  <i class="fa fa-vk fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                            <a href="#">
+                                <span class="fa-stack fa-lg">
+                                  <i class="fa fa-circle fa-stack-2x"></i>
+                                  <i class="fa fa-instagram fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                            <a href="#">
+                                <span class="fa-stack fa-lg">
+                                  <i class="fa fa-circle fa-stack-2x"></i>
+                                  <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <!-- END student -->
+    {% endif %}
+    {% if lesson %}
+        <!-- START Lesson -->
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="tl-stdu">
+                        <div class="tl-std-h">
+                            <div class="sl-nl">
+                                <span class="sl-nl-date">{{ lesson.date|date:"l. j F" }}</span>
+                                <span class="sl-nl-time">{{ lesson.date|time:"H:i" }}</span>
+                                <span class="sl-nl-text">тема:</span>
+                                <span class="sl-nl-title">{{ lesson.title }}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <!-- END Lesson -->
+    {% endif %}
+    {% if form %}
+        <!-- START value form -->
+            <div class="l-box">
+                <div class="l-head mb-0">
+                    <h3>Оценка</h3>
+                </div>
+                <div class="l-edit">
+                    <div class="l-edit-form">
+                        <form action="." method="post" id="form-value-add">
+                            {% csrf_token %}
+                            {{ form.non_field_errors }}
+
+                            <div class="form-group {% if form.value.errors %}errors{% endif %}">
+                                {{ form.value.errors }}
+                                <label for="{{ form.value.id_for_label }}" >{{ form.value.label }}:</label>
+                                <div class="radio-container">
+                                    {% for radio in form.value %}
+                                        <div class="val-radio">
+                                            {{ radio.tag }}
+                                            <label for="{{ radio.id_for_label }}">{{ radio.choice_label }}</label>
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                            <div class="form-group {% if form.comment.errors %}errors{% endif %}">
+                                {{ form.comment.errors }}
+                                <label for="{{ form.comment.id_for_label }}" >{{ form.comment.label }}:</label>
+                                {{ form.comment }}
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        <!-- END value form -->
+    {% endif %}
+    <!-- START Buttons -->
+			<div class="row">
+				<div class="col-md-6">
+					<button type="submit" form="form-value-add" class="tl-btn save">Добавить</button>
+				</div>
+				<div class="col-md-6">
+					<a class="tl-btn cancel" href="{% url 'lesson_edit' lesson.pk %}">Назад</a>
+				</div>
+			</div>
+    <!-- END Buttons -->
+{% endblock content %}

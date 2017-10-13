@@ -1,0 +1,104 @@
+{% extends 'sunny/base.html' %}
+{% load staticfiles %}
+
+{% block title %}Lesson {{ lesson.title }}{% endblock title %}
+
+{% block content %}
+    {% if lesson %}
+        <!-- START Lesson -->
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="tl-stdu mb-5">
+                        <div class="tl-std-h">
+                            <div class="sl-nl">
+                                <span class="sl-nl-date">{{ lesson.date|date:"l. j F" }}</span>
+                                <span class="sl-nl-time">{{ lesson.date|time:"H:i" }}</span>
+                                <span class="sl-nl-text">тема:</span>
+                                <span class="sl-nl-title">{{ lesson.title }}</span>
+                            </div>
+                        </div>
+                        <div class="t-std-s container">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <h4 class="sl-nl-h4">Домашка</h4>
+                                    <div class="sl-nl-hw">
+                                        {% if lesson.homework %}
+                                        <p>{{ lesson.homework }}</p>
+                                        {% else %}
+                                        <p>Гуляем! Домашку не задали!</p>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <!-- END Lesson -->
+
+        <!-- START teacher -->
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="tl-stdu mb-5">
+                        <div class="tl-std-h">
+                            <a href="{% url 'teacher_page' lesson.teacher.user.username %}"><img class="img-fluid" src="{{ MEDIA_URL }}{{ lesson.teacher.pic }}" alt="Фотография {{ lesson.teacher.user.first_name }}"></a>
+                            <span class="teacher-txt">преподаватель:</span>
+                            <h4><a href="{% url 'teacher_page' lesson.teacher.user.username %}">{{ lesson.teacher.user.last_name }} {{ lesson.teacher.user.first_name }}</a></h4>
+                            <p class="white-txt-cite"><i class="fa fa-angle-double-left" aria-hidden="true"></i>{{ lesson.teacher.cite }}<i class="fa fa-angle-double-right" aria-hidden="true"></i></p>
+                            <span class="tstds-phone"><i class="fa fa-phone fa-fw" aria-hidden="true"></i> {{ lesson.teacher.phone }}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <!-- END teacher -->
+
+        <!-- START Search panel -->
+            <div class="l-box">
+                <div class="l-head mb-0">
+                    <h3>Участники</h3>
+                </div>
+            </div>
+        <!-- END Search panel -->
+
+        {% if students_values %}
+            <!-- START Students panel -->
+                <div class="tl-stds">
+                    <div class="row">
+                        {% for student, value in students_values %}
+                            <div class="col-md-6">
+                                <div class="tl-stdu">
+                                    <div class="tl-std-h">
+                                        {% if value %}
+                                            {% if value.value == 10 %}
+                                                <span class="student-value red">Н</span>
+                                            {% else %}
+                                                <span class="student-value">{{ value.value }}</span>
+                                            {% endif %}
+                                        {% else %}
+                                            <span class="student-value yellow"></span>
+                                        {% endif %}
+                                        <a href="{% url 'student_page' student.user.username %}"><img class="img-fluid" src="{{ MEDIA_URL }}{{ student.pic }}" alt="Фотография студента"></a>
+                                        <h4><a href="{% url 'student_page' student.user.username %}">{{ student.user.first_name }} {{ student.user.last_name }}</a></h4>
+                                        <p class="white-txt-cite"><i class="fa fa-angle-double-left" aria-hidden="true"></i>{{ student.cite }}<i class="fa fa-angle-double-right" aria-hidden="true"></i></p>
+                                    </div>
+                                    <div class="tl-std-b">
+                                        <h4 class="box-body-h4">Комментарий</h4>
+                                        {% if value and value.comment %}
+                                        <div class="student-comment text-center">
+                                            <p>{{ value.comment }}</p>
+                                        </div>
+                                        {% else %}
+                                        <div class="student-comment text-center">
+                                            <p>Комментарий не добавлен.</p>
+                                        </div>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            <!-- END Students Panel -->
+        {% endif %}
+    {% endif %}
+{% endblock content %}

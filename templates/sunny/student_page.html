@@ -1,0 +1,108 @@
+{% extends 'sunny/base.html' %}
+{% load staticfiles %}
+
+{% block title %} {% endblock title %}
+
+{% block content %}
+    <!-- START student -->
+    <div class="student-panel">
+        <div class="row">
+            <div class="col-md-3">
+                <img class="img-fluid rounded-circle" src="{{ MEDIA_URL }}{{ student.pic }}" alt="User picture">
+            </div>
+            <div class="col-md-9">
+                <h4 class="student-name">{{ student.user.first_name }} {{ student.user.last_name }}</h4>
+                <p class="student-cite"><i class="fa fa-angle-double-left" aria-hidden="true"></i>{{ student.cite }}<i class="fa fa-angle-double-right" aria-hidden="true"></i></p>
+                <div class="student-social-btns">
+                    <span class="student-phone"><i class="fa fa-phone mr-2" aria-hidden="true"></i>{{ student.phone }}</span>
+                    <a href="#">
+                        <span class="fa-stack fa-lg">
+                          <i class="fa fa-circle fa-stack-2x"></i>
+                          <i class="fa fa-vk fa-stack-1x fa-inverse"></i>
+                        </span>
+                    </a>
+                    <a href="#">
+                        <span class="fa-stack fa-lg">
+                          <i class="fa fa-circle fa-stack-2x"></i>
+                          <i class="fa fa-instagram fa-stack-1x fa-inverse"></i>
+                        </span>
+                    </a>
+                    <a href="#">
+                        <span class="fa-stack fa-lg">
+                          <i class="fa fa-circle fa-stack-2x"></i>
+                          <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+                        </span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- END student -->
+
+    <!-- START student's static -->
+    <div class="static-panel">
+        <div class="row no-gutters s-container">
+            <div class="col-md-3 col-sm-6 col-6"><span class="s-box">посещений<strong>{{ student.visits }}</strong></span></div>
+            <div class="col-md-3 col-sm-6 col-6"><span class="s-box">cash<strong>{{ student.cash }}$</strong></span></div>
+            <div class="col-md-3 col-sm-6 col-6"><span class="s-box">молодец<strong>88%</strong></span></div>
+            <div class="col-md-3 col-sm-6 col-6"><span class="s-box">рейтинг<strong>#{{ student.rate }}</strong></span></div>
+        </div>
+    </div>
+    <!-- END student's static -->
+
+    {% if values %}
+        <!-- START Student's values -->
+        <div class="tl-stds">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="tl-stdu">
+                        <div class="tl-std-h">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-8 fio"><span>Занятие</span></div>
+                                    <div class="col-4 rate"><span>Cash</span></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="books">
+                            {% for value in values %}
+                                <div class="book">
+                                    <div class="container">
+                                        <div class="row">
+                                            <div class="col-8">
+                                                <a href="{% url 'lesson_page' value.lesson.pk %}">{{ value.lesson.title }}</a>
+                                            </div>
+                                            <div class="col-4 book-trash">
+                                                {{ value.value }}$
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% if count_v > 5 %}<span class="show-more" id="show-more-values" data-count="{{ count_v }}" data-username="{{ student.user.username }}">Показать ещё</span>{% endif %}
+        <!-- END Student's values -->
+    {% endif %}
+
+    <!-- START teacher -->
+    <div class="row">
+        <div class="col-md-12">
+            <div class="tl-stdu mb-5">
+                <div class="tl-std-h">
+                    <img class="img-fluid" src="{{ MEDIA_URL }}{{ student.teacher.pic }}" alt="Фотография {{ student.teacher.user.first_name }}">
+                    <h4>{{ student.teacher.user.last_name }} {{ student.teacher.user.first_name }}</h4>
+                    <p>{{ student.teacher.cite }}</p>
+                    <span class="tstds-phone"><i class="fa fa-phone fa-fw" aria-hidden="true"></i> {{ student.teacher.phone }}</span>
+                </div>
+                <div class="tl-std-f">
+                    <h3>Куратор</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- END teacher -->
+{% endblock content %}
