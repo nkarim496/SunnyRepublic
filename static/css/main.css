@@ -1276,7 +1276,11 @@ nav.cl-effect-21 a:focus {
 .lesson-card .nav-pills .nav-item.show .nav-link,
 .lesson-card .nav-pills .nav-link.active,
 .lesson-card .nav-pills .nav-link:focus,
-.lesson-card .nav-pills .nav-link.active:hover {
+.lesson-card .nav-pills .nav-link.active:hover,
+.lesson-card.nxt .nav-pills .nav-item.show .nav-link,
+.lesson-card.nxt .nav-pills .nav-link.active,
+.lesson-card.nxt .nav-pills .nav-link:focus,
+.lesson-card.nxt .nav-pills .nav-link.active:hover {
 	color: #495057;
 	background-color: #fff;
     border-color: #ddd #ddd #fff;
@@ -1310,4 +1314,18 @@ nav.cl-effect-21 a:focus {
     background-color: #ffc107;
     top: 1.55rem;
     right: 1rem;
+}
+.no-value {
+	display: block;
+	width: 1rem;
+	height: 1rem;
+    background-color: #ffc107;
+}
+.lesson-card.nxt .card-header,
+.lesson-card.nxt .card-footer {
+	background-color: #28a745;
+}
+.lesson-card.nxt .nav-pills .nav-link:hover {
+	color: #Fff;
+    background-color: #1d9238;
 }

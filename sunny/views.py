@@ -24,9 +24,11 @@ def search_students(starts_with):
     students = None
     starts_with = starts_with.split(' ')
     if len(starts_with) == 1:
-        students = Student.objects.filter(user__first_name__istartswith=starts_with[0]).order_by('user__first_name')[:10]
+        students = Student.objects.filter(user__first_name__istartswith=starts_with[0]).order_by('user__first_name')[
+                   :10]
         if students.count() == 0:
-            students = Student.objects.filter(user__last_name__istartswith=starts_with[0]).order_by('user__last_name')[:10]
+            students = Student.objects.filter(user__last_name__istartswith=starts_with[0]).order_by('user__last_name')[
+                       :10]
             if students.count() == 0:
                 students = None
     elif len(starts_with) == 2:
@@ -34,7 +36,8 @@ def search_students(starts_with):
                                           user__last_name__istartswith=starts_with[1]).order_by('user__first_name')[:10]
         if students.count() == 0:
             students = Student.objects.filter(user__first_name__istartswith=starts_with[1],
-                                              user__last_name__istartswith=starts_with[0]).order_by('user__last_name')[:10]
+                                              user__last_name__istartswith=starts_with[0]).order_by('user__last_name')[
+                       :10]
             if students.count() == 0:
                 students = None
     return students
@@ -132,7 +135,7 @@ def student_lessons_ajax(request):
     if request.method == 'GET':
         offset = int(request.GET['offset'])
         student = Student.objects.get(user=request.user)
-        lessons = student.lesson_set.filter(date__lte=datetime.now()).order_by('-date')[offset:offset+10]
+        lessons = student.lesson_set.filter(date__lte=datetime.now()).order_by('-date')[offset:offset + 10]
         values = []
         for lesson in lessons:
             value = Value.objects.filter(lesson=lesson, student=student).first()
@@ -175,7 +178,8 @@ def get_values_ajax(request):
         offset_start = int(request.GET['offsetStart'])
         offset_end = int(request.GET['offsetEnd'])
         username = request.GET['username']
-        values = Value.objects.filter(student__user__username=username).order_by('-lesson__date')[offset_start:offset_end]
+        values = Value.objects.filter(student__user__username=username).order_by('-lesson__date')[
+                 offset_start:offset_end]
     return render(request, 'sunny/get_values_ajax.html', {'values': values})
 
 
@@ -396,12 +400,25 @@ def teacher_lessons(request):
     except Teacher.DoesNotExist:
         raise Http404("Teacher doesn't exist")
     lessons = teacher.lesson_set.all().order_by('-date')
+    nxt = teacher.lesson_set.filter(date__gte=datetime.now()).order_by('date').first()
 
-    # добавляем в уроки студентов без оценок
+    # добавляем в уроки оценки студентов и флаги следующее занятие,
+    # флаг все студенты имеют оценки
     for lesson in lessons:
-        lesson.students_wt_values = []
+        lesson.students_values = []
+        all_values = True
+
+        if nxt == lesson:
+            lesson.nxt = True
+        else:
+            lesson.nxt = False
+
         for student in lesson.students.all():
-            if not lesson.value_set.filter(student=student).exists():
-                lesson.students_wt_values.append(student)
+            value = lesson.value_set.filter(student=student).first()
+            if not value:
+                all_values = False
+            lesson.students_values.append({'student': student,
+                                           'value': value})
+        lesson.all_values = all_values
 
     return render(request, 'sunny/teacher_lessons.html', {'teacher': teacher, 'lessons': lessons})
