@@ -29,6 +29,9 @@
                         <a class="nav-link" data-toggle="pill" href="#values{{ lesson.pk }}" role="tab">Оценки</a>
                       </li>
                     </ul>
+                      {% if  lesson.students_wt_values %}
+                          <span class="rounded-circle no-values"></span>
+                      {% endif %}
                   </div>
                   <div class="card-body">
                     <div class="tab-content">
