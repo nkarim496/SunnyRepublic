@@ -1,0 +1,81 @@
+{% extends 'sunny/base.html' %}
+{% load staticfiles %}
+
+{% block title %}Занятия{% endblock title %}
+
+{% block content %}
+    <!-- START Search panel -->
+        <div class="l-box">
+            <div class="l-head mb-0">
+                <h3>Занятия</h3>
+            </div>
+        </div>
+    <!-- END Search panel -->
+    {% if lessons %}
+        <div class="row">
+        {% for lesson in lessons %}
+            <!-- START Teacher Lessons -->
+              <div class="col-md-6">
+                <div class="card mb-4 lesson-card">
+                  <div class="card-header">
+                    <ul class="nav nav-pills card-header-pills" id="lessontabs{{ lesson.pk }}" role="tablist">
+                      <li class="nav-item">
+                        <a class="nav-link active" data-toggle="pill" href="#lesson{{ lesson.pk }}" role="tab">Занятие</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" data-toggle="pill" href="#students{{ lesson.pk }}" role="tab">Участники</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" data-toggle="pill" href="#values{{ lesson.pk }}" role="tab">Оценки</a>
+                      </li>
+                    </ul>
+                  </div>
+                  <div class="card-body">
+                    <div class="tab-content">
+                      <div role="tabpanel" class="tab-pane active" id="lesson{{ lesson.pk }}">
+                        <h4 class="card-title"><a href="{% url 'lesson_page' lesson.pk %}">{{ lesson.title }}</a></h4>
+                        {% if lesson.homework %}
+                          <p class="card-text">{{ lesson.homework }}</p>
+                        {% else %}
+                          <p class="card-text text-muted">Домашнее задание не задано.</p>
+                        {% endif %}
+                      </div>
+                      <div class="tab-pane" id="students{{ lesson.pk }}" role="tabpanel">
+                        <div class="card-text">
+                          {% if lesson.students.all %}
+                            <ul class="list-group list-group-flush">
+                              {% for student in lesson.students.all %}
+                                <li class="list-group-item"><a href="{% url 'student_page' student.user.username %}">{{ student.user.first_name }} {{ student.user.last_name }}</a></li>
+                              {% endfor %}
+                            </ul>
+                          {% else %}
+                              <p class="card-text text-muted">К занятию не добавлено ни одного участника.</p>
+                          {% endif %}
+                        </div>
+                      </div>
+                      <div class="tab-pane" id="values{{ lesson.pk }}" role="tabpanel">
+                        <div class="card-text">
+                          {% if lesson.students_wt_values %}
+                            <ul class="list-group list-group-flush">
+                              {% for student in lesson.students_wt_values %}
+                                <li class="list-group-item"><a href="{% url 'value_add' student.user.username lesson.pk %}">{{ student.user.first_name }} {{ student.user.last_name }}</a></li>
+                                  {% endfor %}
+                            </ul>
+                            <p class="card-text text-muted"><small>Кликните на студента, чтобы поставить оценку.</small></p>
+                          {% else %}
+                            <p class="card-text text-muted">Нет студентов с непроставленными оценками для этого занятия.</p>
+                          {% endif %}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card-footer">
+                    <small>{{ lesson.date|date:"l. j F Y" }}<br>{{ lesson.date|time:"H:i" }}</small>
+                  </div>
+                </div>
+              </div>
+        {% endfor %}
+        </div>
+    <!-- START Teacher Lessons -->
+    {% endif %}
+{% endblock content %}

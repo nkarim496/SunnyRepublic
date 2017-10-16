@@ -196,10 +196,10 @@
         {% if not editable %}
 			<div class="row">
 				<div class="col-md-6">
-					<button type="submit" form="form-lesson-add" class="tl-btn save">Сохранить</button>
+					<a href="{% url 'teacher_lessons' %}" class="tl-btn save">К занятям</a>
 				</div>
 				<div class="col-md-6">
-					<span class="tl-btn cancel">Назад</span>
+					<span class="tl-btn cancel">К оценкам</span>
 				</div>
 			</div>
         {% else %}

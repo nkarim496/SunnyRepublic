@@ -20,7 +20,7 @@
 {% endif %}
 
 {% if teachers %}
-<!-- START slide menu -->
+<!-- START slide menu teachers -->
 <div off-canvas="m-menu left shift">
     <div class="sb-nav">
         <span class="btn-close"><i class="fa fa-times"></i></span>
@@ -30,12 +30,12 @@
                 <a href=""><i class="fa fa-cog"></i></a>
             </div>
             <ul>
-                <li><a href="#">Занятия</a></li>
+                <li><a href="{% url 'teacher_lessons' %}">Занятия</a></li>
                 <li><a href="#">Литература</a></li>
                 <li><a href="#">Рейтинги</a></li>
             </ul>
         </div>
     </div>
 </div>
-<!-- END slide menu -->
+<!-- END slide menu teachers-->
 {% endif %}

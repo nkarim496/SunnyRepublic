@@ -829,6 +829,8 @@ div[off-canvas*=left] {
 }
 .tl-btn.save:hover {
 	background-color: #90b55a;
+	color: #fff;
+	text-decoration: none;
 }
 .tl-btn.cancel {
 	background-color: #f9736f;
@@ -1257,4 +1259,45 @@ nav.cl-effect-21 a:focus {
 	background-color: #80a8cc;
 	color: #fff;
 	border: 2px solid #80a8cc;
+}
+/* lesson card */
+.lesson-card .card-header {
+	background-color: #80a8cc;
+	-webkit-border-radius: 0;
+	-moz-border-radius: 0;
+	border-radius: 0;
+}
+.lesson-card .card-header:first-child {
+	-webkit-border-radius: 0;
+	-moz-border-radius: 0;
+	border-radius: 0;
+}
+.lesson-card .nav-pills .nav-item.show .nav-link,
+.lesson-card .nav-pills .nav-link.active,
+.lesson-card .nav-pills .nav-link:focus,
+.lesson-card .nav-pills .nav-link.active:hover {
+	color: #495057;
+	background-color: #fff;
+    border-color: #ddd #ddd #fff;
+}
+.lesson-card .nav-pills .nav-link {
+	color: #fff;
+}
+
+.lesson-card .nav-pills .nav-link:hover {
+    border-color: #5b7997;
+    background-color: #7396b6;
+    color: #fff;
+}
+.lesson-card .card-footer:last-child {
+	-webkit-border-radius: 0;
+	-moz-border-radius: 0;
+	border-radius: 0;
+}
+.lesson-card .card-footer {
+	background-color: rgb(128, 168, 204);
+	color: #fff;
+}
+.lesson-card .card-body h4 > a:hover {
+	color: #3c3c3c;
 }

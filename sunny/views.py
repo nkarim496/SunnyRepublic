@@ -386,3 +386,22 @@ def lesson_delete(request, lesson_id):
     else:
         print("Нельзя удалить состоявшийся урок.")
     return redirect('teacher_home')
+
+
+@login_required
+@user_passes_test(is_teacher)
+def teacher_lessons(request):
+    try:
+        teacher = Teacher.objects.get(user=request.user)
+    except Teacher.DoesNotExist:
+        raise Http404("Teacher doesn't exist")
+    lessons = teacher.lesson_set.all().order_by('-date')
+
+    # добавляем в уроки студентов без оценок
+    for lesson in lessons:
+        lesson.students_wt_values = []
+        for student in lesson.students.all():
+            if not lesson.value_set.filter(student=student).exists():
+                lesson.students_wt_values.append(student)
+
+    return render(request, 'sunny/teacher_lessons.html', {'teacher': teacher, 'lessons': lessons})

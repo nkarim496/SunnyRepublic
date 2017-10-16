@@ -36,7 +36,7 @@
 {% endif %}
 {% if teachers %}
     <!-- START Mobile Menu -->
-	<div class="sm-user hidden-md-up">
+	<div class="sm-user d-sm-none">
 		<a href="#" id="toggle-m-menu"><i class="fa fa-bars"></i></a>
 		<a href="{% url 'teacher_home' %}" class="sm-user-img"><img src="{{ MEDIA_URL }}{{ user.teacher.pic }}" alt="avatar" class="img-fluid"></a>
 		<a href="{% url 'auth_logout' %}"><i class="fa fa-sign-out"></i></a>
@@ -44,11 +44,11 @@
     <!-- END Mobile Menu -->
 
 	<!-- START TOP MENU -->
-	<div class="top-menu hidden-sm-down">
+	<div class="top-menu d-none d-sm-flex">
 		<a href="{% url 'teacher_home' %}" class="btn-home"><i class="fa fa-home fa-fw" aria-hidden="true"></i></a>
 		<ul class="nav">
 			<li class="nav-item">
-				<a class="nav-link" href="#">Занятия</a>
+				<a class="nav-link" href="{% url 'teacher_lessons' %}">Занятия</a>
 			</li>
 			<li class="nav-item">
 				<a class="nav-link" href="#">Литература</a>

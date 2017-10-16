@@ -35,6 +35,7 @@ urlpatterns = [
     url(r'^get_values_ajax/$', views.get_values_ajax, name='get_values_ajax'),
     url(r'^teacher_home/$', views.teacher_home, name='teacher_home'),
     url(r'^teacher_page/(?P<username>[\w_-]+)/$', views.teacher_page, name='teacher_page'),
+    url(r'^teacher/lessons/$', views.teacher_lessons, name='teacher_lessons'),
     url(r'^lesson/(?P<lesson_id>\d+)/$', views.lesson_page, name='lesson_page'),
     url(r'^lesson/add/$', views.lesson_add, name='lesson_add'),
     url(r'^lesson/edit/(?P<lesson_id>\d+)/$', views.lesson_edit, name='lesson_edit'),
