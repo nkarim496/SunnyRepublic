@@ -38,7 +38,7 @@
                       <div role="tabpanel" class="tab-pane active" id="lesson{{ lesson.pk }}">
                         <h4 class="card-title"><a href="{% url 'lesson_page' lesson.pk %}">{{ lesson.title }}</a></h4>
                         {% if lesson.homework %}
-                          <p class="card-text">{{ lesson.homework }}</p>
+                          <p class="card-text">{{ lesson.homework|safe }}</p>
                         {% else %}
                           <p class="card-text text-muted">Домашнее задание не задано.</p>
                         {% endif %}

@@ -1,5 +1,16 @@
 $(function() {
 
+	// froala editor
+	$('#id_homework').froalaEditor({
+		pluginsEnabled: ['lists', 'link', 'colors'],
+		toolbarButtons: ['undo', 'redo', '|', 'color', 'bold', 'underline', 'insertLink', '|', 'formatOL', 'formatUL'],
+		toolbarButtonsMD: ['undo', 'redo', '|', 'color', 'bold', 'underline', 'insertLink', '|', 'formatOL', 'formatUL'],
+		toolbarButtonsSM: ['undo', 'redo', '|', 'color', 'bold', 'underline', 'insertLink', '|', 'formatOL', 'formatUL'],
+		toolbarButtonsXS: ['undo', 'redo', '|', 'color', 'bold', 'underline', 'insertLink', '|', 'formatOL', 'formatUL'],
+		language: 'ru',
+		placeholderText: 'Напишите домашнее задание...'
+	});
+
 	// get student lessons ajax
 	var offset = 10,
 		btn = $('#show-more-lessons'),

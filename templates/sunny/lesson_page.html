@@ -17,13 +17,13 @@
                                 <span class="sl-nl-title">{{ lesson.title }}</span>
                             </div>
                         </div>
-                        <div class="t-std-s container">
+                        <div class="lesson-homework container">
                             <div class="row">
                                 <div class="col-md-12">
                                     <h4 class="sl-nl-h4">Домашка</h4>
                                     <div class="sl-nl-hw">
                                         {% if lesson.homework %}
-                                        <p>{{ lesson.homework }}</p>
+                                        <p>{{ lesson.homework|safe }}</p>
                                         {% else %}
                                         <p>Гуляем! Домашку не задали!</p>
                                         {% endif %}

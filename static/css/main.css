@@ -858,6 +858,7 @@ div[off-canvas*=left] {
 .t-std-s {
 	text-align: center;
 }
+.lesson-homework h4,
 .t-std-s h4 {
 	font-size: 1rem;
 	font-weight: 300;
@@ -948,6 +949,7 @@ div[off-canvas*=left] {
 	border-radius: 3rem;
 	margin: .5rem;
 }
+.lesson-homework .sl-nl-h4,
 .t-std-s .sl-nl-h4 {
 	font-size: 1.5rem;
     font-weight: 100;
@@ -966,7 +968,7 @@ div[off-canvas*=left] {
     margin-bottom: 1rem;
 }
 .sl-nl-hw {
-	padding: 1.5rem 1rem 2rem;
+	padding: 0 1rem;
 }
 
 /* TOP MENU */
@@ -1328,4 +1330,27 @@ nav.cl-effect-21 a:focus {
 .lesson-card.nxt .nav-pills .nav-link:hover {
 	color: #Fff;
     background-color: #1d9238;
+}
+
+/* froala editor */
+.form-group .fr-toolbar.fr-top {
+	-webkit-box-shadow: none;
+	-moz-box-shadow: none;
+	box-shadow: none;
+    border: 1px solid #ede9e2;
+    background-color: #fffbf5;
+	-webkit-border-radius: .25rem .24rem 0 0;
+	-moz-border-radius: .25rem .24rem 0 0;
+	border-radius: .25rem .24rem 0 0;
+}
+.form-group .fr-box.fr-basic.fr-top .fr-wrapper {
+	-webkit-box-shadow: none;
+	-moz-box-shadow: none;
+	box-shadow: none;
+	border: 1px solid #ede9e2;
+	border-top: none;
+	background-color: #fffbf5;
+	-webkit-border-radius: 0 0 .25rem .25rem;
+	-moz-border-radius: 0 0 .25rem .25rem;
+	border-radius: 0 0 .25rem .25rem;
 }

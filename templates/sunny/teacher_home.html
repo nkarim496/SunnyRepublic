@@ -28,13 +28,13 @@
                     <span class="sl-nl-title">{{ nxt.title }}</span>
                 </div>
             </div>
-            <div class="t-std-s container">
+            <div class="lesson-homework container">
                 <div class="row">
                     <div class="col-md-6 bor">
                         <h4 class="sl-nl-h4">Домашка</h4>
                         <div class="sl-nl-hw">
                             {% if nxt.homework %}
-                            <p>{{ nxt.homework }}</p>
+                            <p>{{ nxt.homework|safe }}</p>
                             {% else %}
                             <p>Гуляем! Домашку не задали!</p>
                             {% endif %}
